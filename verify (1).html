@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LUMIÈRO - Verifikasi Produk</title>
+  <style>
+    body {
+      background-color: #000;
+      color: silver;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .logo {
+      max-width: 180px;
+      margin-bottom: 30px;
+    }
+    .result {
+      font-size: 1.5em;
+      border: 2px solid silver;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+    }
+    .verified { color: #0f0; }
+    .already { color: #ff0; }
+    .invalid { color: #f00; }
+  </style>
+</head>
+<body>
+  <img src="logo.png" alt="LUMIÈRO Logo" class="logo" />
+  <div class="result" id="verificationResult">Memuat...</div>
+  <script>
+    async function verifyProduct() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get("id");
+      const verifiedFlag = urlParams.get("verified");
+
+      const response = await fetch("database.json");
+      const data = await response.json();
+
+      const result = document.getElementById("verificationResult");
+      const product = data.find(item => item.id === id);
+
+      if (!product) {
+        result.innerHTML = "❌ Produk tidak terdaftar.";
+        result.className += " invalid";
+      } else if (verifiedFlag === "yes") {
+        result.innerHTML = "⚠️ Produk ini telah diverifikasi sebelumnya.";
+        result.className += " already";
+      } else {
+        result.innerHTML = "✅ Produk Asli. Belum Pernah Diverifikasi.";
+        result.className += " verified";
+      }
+    }
+    verifyProduct();
+  </script>
+</body>
+</html>
