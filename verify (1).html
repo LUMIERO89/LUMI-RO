@@ -1,67 +1,56 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LUMIÈRO - Verifikasi Produk</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifikasi Produk - Lumièro</title>
   <style>
     body {
-      background-color: #000;
-      color: silver;
-      font-family: 'Segoe UI', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      padding: 20px;
+      background-color: #0a0a0a;
+      color: white;
       text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 50px 20px;
     }
+
     .logo {
-      max-width: 180px;
+      width: 150px;
       margin-bottom: 30px;
+      animation: glow 2s infinite alternate;
     }
-    .result {
-      font-size: 1.5em;
-      border: 2px solid silver;
-      padding: 20px;
-      border-radius: 10px;
+
+    @keyframes glow {
+      0% {
+        filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px #5dfcff);
+      }
+      100% {
+        filter: drop-shadow(0 0 10px #5dfcff) drop-shadow(0 0 20px #5dfcff);
+      }
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
       max-width: 600px;
+      margin: auto;
     }
-    .verified { color: #0f0; }
-    .already { color: #ff0; }
-    .invalid { color: #f00; }
+
+    .checkmark {
+      font-size: 60px;
+      color: #00ff99;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
-  <img src="logo.png" alt="LUMIÈRO Logo" class="logo" />
-  <div class="result" id="verificationResult">Memuat...</div>
-  <script>
-    async function verifyProduct() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get("id");
-      const verifiedFlag = urlParams.get("verified");
-
-      const response = await fetch("database.json");
-      const data = await response.json();
-
-      const result = document.getElementById("verificationResult");
-      const product = data.find(item => item.id === id);
-
-      if (!product) {
-        result.innerHTML = "❌ Produk tidak terdaftar.";
-        result.className += " invalid";
-      } else if (verifiedFlag === "yes") {
-        result.innerHTML = "⚠️ Produk ini telah diverifikasi sebelumnya.";
-        result.className += " already";
-      } else {
-        result.innerHTML = "✅ Produk Asli. Belum Pernah Diverifikasi.";
-        result.className += " verified";
-      }
-    }
-    verifyProduct();
-  </script>
+  <img src="1000139046.png" alt="Logo Lumièro" class="logo">
+  <div class="checkmark">✅</div>
+  <h1>Produk Asli</h1>
+  <p>Produk ini merupakan produk original dari <strong>LUMIÈRO</strong>.</p>
+  <p>Terima kasih telah memilih parfum kami.</p>
 </body>
 </html>
