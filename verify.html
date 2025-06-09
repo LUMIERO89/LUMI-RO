@@ -1,56 +1,37 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verifikasi Produk - Lumièro</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lumièro</title>
   <style>
     body {
-      background-color: #0a0a0a;
-      color: white;
-      text-align: center;
-      font-family: 'Segoe UI', sans-serif;
-      padding: 50px 20px;
+      background-color: #000;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-
     .logo {
-      width: 150px;
-      margin-bottom: 30px;
-      animation: glow 2s infinite alternate;
+      width: 250px;
+      animation: glow 2s ease-in-out infinite alternate;
     }
-
     @keyframes glow {
-      0% {
-        filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px #5dfcff);
+      from {
+        filter: drop-shadow(0 0 10px #fff);
       }
-      100% {
-        filter: drop-shadow(0 0 10px #5dfcff) drop-shadow(0 0 20px #5dfcff);
+      to {
+        filter: drop-shadow(0 0 25px #fff);
       }
-    }
-
-    h1 {
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 18px;
-      max-width: 600px;
-      margin: auto;
-    }
-
-    .checkmark {
-      font-size: 60px;
-      color: #00ff99;
-      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-  <img src="1000139046.png" alt="Logo Lumièro" class="logo">
-  <div class="checkmark">✅</div>
-  <h1>Produk Asli</h1>
-  <p>Produk ini merupakan produk original dari <strong>LUMIÈRO</strong>.</p>
-  <p>Terima kasih telah memilih parfum kami.</p>
+  <img src="logo.png" alt="Lumièro Logo" class="logo" />
 </body>
 </html>
