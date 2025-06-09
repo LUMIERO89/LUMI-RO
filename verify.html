@@ -1,97 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>LUMIÈRO - Product Verification</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #0e0e0e;
-            color: silver;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 50px 20px;
-        }
-        .container {
-            max-width: 600px;
-            text-align: center;
-        }
-        .logo {
-            width: 250px;
-            margin-bottom: 30px;
-            animation: blink 2s infinite ease-in-out;
-        }
-        @keyframes blink {
-            0% { filter: brightness(100%); }
-            50% { filter: brightness(180%); }
-            100% { filter: brightness(100%); }
-        }
-        h1 {
-            font-size: 24px;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-        .sub {
-            font-size: 14px;
-            color: #ccc;
-            margin-bottom: 40px;
-        }
-        .result {
-            margin-top: 30px;
-            padding: 20px;
-            border: 1px solid silver;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-        }
-        .status {
-            font-weight: bold;
-            font-size: 18px;
-            margin-top: 10px;
-        }
-        .verified {
-            color: #4CAF50;
-        }
-        .used {
-            color: #FFC107;
-        }
-        .invalid {
-            color: #F44336;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>LUMIÈRO - Product Verification</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: silver;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .logo {
+      width: 250px;
+      margin-bottom: 30px;
+      animation: blink 2s infinite ease-in-out;
+    }
+
+    @keyframes blink {
+      0% { filter: brightness(100%); }
+      50% { filter: brightness(180%); }
+      100% { filter: brightness(100%); }
+    }
+
+    h1 {
+      font-size: 20px;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .sub {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 30px;
+    }
+
+    .result {
+      padding: 20px;
+      border: 1px solid silver;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      max-width: 500px;
+    }
+
+    .status {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    .verified {
+      color: #4CAF50;
+    }
+
+    .used {
+      color: #FFC107;
+    }
+
+    .invalid {
+      color: #F44336;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <img src="1000138680-removebg-preview.png" alt="LUMIÈRO Logo" class="logo">
-        <h1>This product is a verified original by LUMIÈRO.</h1>
-        <div class="sub">Because true luxury deserves authenticity.</div>
-        <div class="result" id="result">Checking code...</div>
-    </div>
+  <img src="1000139690.jpg" alt="LUMIÈRO Logo" class="logo">
+  <h1>This product is a verified original by LUMIÈRO.</h1>
+  <div class="sub">Because true luxury deserves authenticity.</div>
+  <div class="result" id="result">Checking code...</div>
 
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
 
-        fetch('database.json')
-            .then(response => response.json())
-            .then(data => {
-                const resultDiv = document.getElementById('result');
-                if (!id) {
-                    resultDiv.innerHTML = "<div class='status invalid'>❌ Kode tidak ditemukan di URL.</div>";
-                    return;
-                }
-                if (data[id] === undefined) {
-                    resultDiv.innerHTML = `<div><strong>Kode:</strong> ${id}</div><div class='status invalid'>❌ Kode ini tidak terdaftar. Produk tidak asli.</div>`;
-                } else if (data[id].verified === true) {
-                    resultDiv.innerHTML = `<div><strong>Kode:</strong> ${id}</div><div class='status used'>⚠️ Kode ini sudah pernah digunakan sebelumnya.</div>`;
-                } else {
-                    resultDiv.innerHTML = `<div><strong>Kode:</strong> ${id}</div><div class='status verified'>✅ Produk Asli – Belum Pernah Diverifikasi</div>`;
-                }
-            })
-            .catch(error => {
-                document.getElementById('result').innerHTML = "<div class='status invalid'>⚠️ Gagal memuat data verifikasi.</div>";
-            });
-    </script>
+    fetch('database.json')
+      .then(response => response.json())
+      .then(data => {
+        const resultDiv = document.getElementById('result');
+        if (!id) {
+          resultDiv.innerHTML = "<div class='status invalid'>❌ Kode tidak ditemukan di URL.</div>";
+          return;
+        }
+        if (data[id] === undefined) {
+          resultDiv.innerHTML = `<div><strong>Kode:</strong> ${id}</div><div class='status invalid'>❌ Kode ini tidak terdaftar. Produk tidak asli.</div>`;
+        } else if (data[id].verified === true) {
+          resultDiv.innerHTML = `<div><strong>Kode:</strong> ${id}</div><div class='status used'>⚠️ Kode ini sudah pernah digunakan sebelumnya.</div>`;
+        } else {
+          resultDiv.innerHTML = `<div><strong>Kode:</strong> ${id}</div><div class='status verified'>✅ Produk Asli – Belum Pernah Diverifikasi</div>`;
+        }
+      })
+      .catch(error => {
+        document.getElementById('result').innerHTML = "<div class='status invalid'>⚠️ Gagal memuat data verifikasi.</div>";
+      });
+  </script>
 </body>
 </html>
