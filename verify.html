@@ -1,93 +1,34 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>LUMIÈRO - Product Verification</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #0e0e0e;
-            color: silver;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 50px 20px;
-        }
-        .container {
-            max-width: 600px;
-            text-align: center;
-        }
-        h1 {
-            font-size: 24px;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-        .sub {
-            font-size: 14px;
-            color: #ccc;
-            margin-bottom: 40px;
-        }
-        .result {
-            margin-top: 30px;
-            padding: 20px;
-            border: 1px solid silver;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-        }
-        .status {
-            font-weight: bold;
-            font-size: 18px;
-            margin-top: 10px;
-        }
-        .verified {
-            color: #4CAF50;
-        }
-        .used {
-            color: #FFC107;
-        }
-        .invalid {
-            color: #F44336;
-        }
-        .logo {
-            max-width: 200px;
-            margin-bottom: 30px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verifikasi Produk Lumièro</title>
+  <style>
+    body {
+      background-color: #0e0e0e;
+      color: #f5f5f5;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    .checkmark {
+      font-size: 80px;
+      color: #00ff99;
+    }
+    h1 {
+      font-size: 28px;
+      margin-top: 20px;
+    }
+    p {
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <img src="logo.png" alt="LUMIÈRO Logo" class="logo">
-        <h1>This product is a verified original by LUMIÈRO.</h1>
-        <div class="sub">Because true luxury deserves authenticity.</div>
-        <div class="result" id="result">
-            Checking code...
-        </div>
-    </div>
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
-
-        fetch('database.json')
-            .then(response => response.json())
-            .then(data => {
-                const resultDiv = document.getElementById('result');
-                if (!id) {
-                    resultDiv.innerHTML = "<div class='status invalid'>❌ Kode tidak ditemukan di URL.</div>";
-                    return;
-                }
-                if (data[id] === undefined) {
-                    resultDiv.innerHTML = `<div><strong>Kode:</strong> ${id}</div><div class='status invalid'>❌ Kode ini tidak terdaftar. Produk tidak asli.</div>`;
-                } else if (data[id].verified === true) {
-                    resultDiv.innerHTML = `<div><strong>Kode:</strong> ${id}</div><div class='status used'>⚠️ Kode ini sudah pernah digunakan sebelumnya.</div>`;
-                } else {
-                    resultDiv.innerHTML = `<div><strong>Kode:</strong> ${id}</div><div class='status verified'>✅ Produk Asli – Belum Pernah Diverifikasi</div>`;
-                }
-            })
-            .catch(error => {
-                document.getElementById('result').innerHTML = "<div class='status invalid'>⚠️ Gagal memuat data verifikasi.</div>";
-            });
-    </script>
+  <div class="checkmark">✅</div>
+  <h1>Produk Asli</h1>
+  <p>Produk ini merupakan produk original dari <strong>LUMIÈRO</strong>.</p>
+  <p>Terima kasih telah memilih parfum kami.</p>
 </body>
 </html>
